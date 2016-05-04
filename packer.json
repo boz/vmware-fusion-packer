@@ -12,7 +12,10 @@
       "ssh_timeout": "45m",
       "source_path": "img/coreos_production_vagrant_vmware_fusion.vmx",
       "shutdown_command": "sudo -S shutdown -P now",
-      "output_directory": "builds/vmware-fusion-packer-vmware"
+      "output_directory": "builds/vmware-fusion-packer-vmware",
+      "vmx_data": {
+        "ethernet0.connectionType": "nat"
+      }
     }
   ],
   "post-processors": [
