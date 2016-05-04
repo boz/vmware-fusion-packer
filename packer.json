@@ -1,0 +1,30 @@
+{
+  "description": "Base for an ovrclk host machine",
+  "min_packer_version": "0.10.0",
+  "builders": [
+    {
+      "type": "vmware-vmx",
+      "headless": false,
+      "vm_name": "vmware-fusion-packer",
+      "ssh_port": 22,
+      "ssh_username": "core",
+      "ssh_private_key_file": "img/vagrant",
+      "ssh_timeout": "45m",
+      "source_path": "img/coreos_production_vagrant_vmware_fusion.vmx",
+      "shutdown_command": "sudo -S shutdown -P now",
+      "output_directory": "builds/vmware-fusion-packer-vmware"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "./builds/{{.Provider}}/vmware-fusion-packer.box",
+      "vagrantfile_template": "img/Vagrantfile",
+      "include": [
+        "img/base_mac.rb",
+        "img/change_host_name.rb",
+        "img/configure_networks.rb"
+      ]
+    }
+  ]
+}
